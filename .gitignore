@@ -1,0 +1,8 @@
+# Ignore ALL files and folders by default
+*
+
+# WHITELIST: Allow the 'openleanchain' folder itself
+!openleanchain/
+
+# WHITELIST: Allow ALL contents inside 'openleanchain' (files/subfolders)
+!openleanchain/**/*
