@@ -14,7 +14,7 @@ LeanChain is built on 3 core principles:
 3. **Runtime Flexibility**: Switch vendors or models during runtime
 
 ---
-### LLM Service Architecture
+### LLM Core Service Architecture Overview
 <center>
 <img src="./architecture.png" width="400">
 </center>
