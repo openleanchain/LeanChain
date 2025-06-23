@@ -67,7 +67,7 @@ pip install openai
 
 ---
 
-## 🧠 Usage Example
+## 🧠 Usage Examples
 
 ### 1. Quick Chat Example
 
