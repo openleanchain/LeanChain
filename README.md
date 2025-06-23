@@ -12,12 +12,33 @@ LeanChain is built on 3 core principles:
 1. **Provider Abstraction**: Decouple your app from specific LLM vendors via standardized interfaces (OpenAI, Azure, etc.)
 2. **Modular Composition**: Plug-and-play memory, tools, and cache
 3. **Runtime Flexibility**: Switch vendors or models during runtime
+4. **AutoGPT-style Agents**: Enable task automation through configurable, plan-based agents
 
 ---
-### LLM Core Service Architecture Overview
+### LeanChain Inference Pipeline Overview
+
+The LeanChain Inference Pipeline intelligently routes user input through an enhanced ModerationService to determine whether to activate an AutoGPT-style agent or return a direct LLM response. It balances safety, flexibility, and task relevance by leveraging modular components like agent templates, context loaders, and memory-aware planning.
+
+<center>
+<img src="./inference.png">
+</center>
+
+---
+
+### LLM Core Service Architecture
 <center>
 <img src="./architecture.png" width="400">
 </center>
+
+#### 🔄 How It Works
+
+1. Load config and instantiate a provider via `load_single_provider()` or `llm_registry`.
+2. Create `LLMCoreService` with optional memory, tools, and cache.
+3. Use `chat()` or `stream_chat()` to interact with LLMs.
+4. Inject or clear memory; plug in tools for external processing (e.g., math).
+5. Switch vendor or model at runtime without changing core logic.
+
+---
 
 ### 📦 Modular Architecture
 
@@ -28,24 +49,20 @@ LeanChain is built on 3 core principles:
 | **Registry** | Dynamic vendor/model resolver with `llm_registry` and `vendor_map`               |
 | **Loader**   | Loads a single provider using project-level configuration                        |
 | **Core**     | Main orchestrator `LLMCoreService`, handling chat flow, tools, memory, and cache |
+| **Agent**    | Enables configurable, AutoGPT-style task execution with planning and reflection  |
 | **Memory**   | Handles memory logic — `ShortMemoryBuffer`, `ExpiringMemoryWrapper`, etc.        |
 | **Tools**    | Plugin tools like `MathTool`, allowing external logic injectioners               |
 | **Utility**  | Lightweight helpers like simple file-based cache                                 |
 
 
-### 🔄 How It Works
-
-1. Load config and instantiate a provider via `load_single_provider()` or `llm_registry`.
-2. Create `LLMCoreService` with optional memory, tools, and cache.
-3. Use `chat()` or `stream_chat()` to interact with LLMs.
-4. Inject or clear memory; plug in tools for external processing (e.g., math).
-5. Switch vendor or model at runtime without changing core logic.
+---
 
 ### ✅ Why LeanChain?
 
 - ✅ Clean and understandable codebase (great for learning or teaching)
 - ✅ Runtime flexibility without heavy dependencies
 - ✅ Extendable for multimodal (image/audio) and agentic workflows
+- ✅ Combining smart task routing, plan-based agent with  fully configurable templates
 
 ---
 
@@ -67,7 +84,7 @@ pip install openai
 
 ---
 
-## 🧠 Usage Examples
+## 🧠 Usage Example
 
 ### 1. Quick Chat Example
 
